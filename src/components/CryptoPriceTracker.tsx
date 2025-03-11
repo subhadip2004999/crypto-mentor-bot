@@ -89,7 +89,7 @@ const CryptoPriceTracker = () => {
 
   if (loading) {
     return (
-      <Card className="bg-crypto-gray/90 border-crypto-gray backdrop-blur-md">
+      <Card className="bg-crypto-gray/80 border-crypto-gray/30 backdrop-blur-md shadow-lg">
         <CardHeader>
           <CardTitle className="text-white flex justify-between items-center">
             <span>Live Cryptocurrency Prices</span>
@@ -118,7 +118,7 @@ const CryptoPriceTracker = () => {
   }
 
   return (
-    <Card className="bg-crypto-gray/90 border-crypto-gray backdrop-blur-md">
+    <Card className="bg-crypto-gray/80 border-crypto-gray/30 backdrop-blur-md shadow-lg">
       <CardHeader className="pb-2">
         <CardTitle className="text-white flex justify-between items-center">
           <div className="flex items-center">
@@ -160,7 +160,7 @@ const CryptoPriceTracker = () => {
       </CardHeader>
       <CardContent>
         {displayedCryptos.map((crypto) => (
-          <div key={crypto.id} className="flex items-center justify-between py-3 border-b border-crypto-gray/30">
+          <div key={crypto.id} className="flex items-center justify-between py-3 border-b border-crypto-gray/30 hover:bg-white/5 transition-colors rounded-md px-2">
             <div className="flex items-center">
               <div className="w-8 h-8 mr-3 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
                 <img src={crypto.image} alt={crypto.name} className="w-6 h-6" />

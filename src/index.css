@@ -104,15 +104,23 @@
   }
   
   .glow-border-green {
-    box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
   }
   
   .glow-border-blue {
-    box-shadow: 0 0 5px rgba(34, 115, 255, 0.5);
+    box-shadow: 0 0 10px rgba(34, 115, 255, 0.7);
   }
   
   .crypto-pattern {
     background-size: 20px 20px;
     background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-lg;
+  }
+
+  .figma-shadow {
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2);
   }
 }
