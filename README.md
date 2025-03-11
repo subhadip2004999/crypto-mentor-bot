@@ -2,7 +2,10 @@
 
 ## Project info
 
-**URL**: https://crypto-mentor-bot.lovable.app/
+**URL**:
+Crypto Assistant 2.0(https://crypto-expert-7c2395.zapier.app/)
+
+Crypto mentor(https://crypto-mentor-bot.lovable.app/)
 
 ## About the project
 
