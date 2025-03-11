@@ -4,6 +4,29 @@
 
 **URL**: https://crypto-mentor-bot.lovable.app/
 
+## About the project
+
+Introducing Crypto mentor - Your Personal Crypto Assistant
+
+Crypto mentor is an advanced AI-powered chatbot designed to provide real-time market data, analysis, and insights on cryptocurrencies. Our goal is to empower crypto enthusiasts, traders, and investors with the knowledge and tools they need to make informed decisions in the rapidly evolving crypto market.
+
+Key Features:
+
+- Real-time market data and updates
+- Advanced technical analysis and charting
+- Personalized market insights and recommendations
+- Multi-currency support and conversion
+- Secure and private user experience
+
+Our chatbot utilizes natural language processing (NLP) and machine learning algorithms to understand user queries and provide accurate and relevant responses. With Crypto Mentor, users can access a wealth of crypto market information, including:
+
+- Current prices and market capitalization
+- 24-hour highs and lows
+- Trading volumes and liquidity
+- Market sentiment and trends
+
+Whether you're a seasoned trader or just starting to explore the world of cryptocurrencies, Crypto Mentor is your ultimate companion for navigating the crypto market with confidence.
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
