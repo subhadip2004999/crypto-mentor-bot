@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				crypto: {
+					'dark': '#121218',
+					'darker': '#0a0a0d',
+					'green': '#00ff88',
+					'blue': '#2273ff',
+					'purple': '#8a2be2',
+					'glow-green': '#00ff8820',
+					'glow-blue': '#2273ff20',
+					'gray': '#2a2a38'
 				}
 			},
 			borderRadius: {
@@ -84,11 +95,26 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-glow': {
+					'0%, 100%': { opacity: '0.4' },
+					'50%': { opacity: '0.7' }
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '-500px 0' },
+					'100%': { backgroundPosition: '500px 0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-glow': 'pulse-glow 3s infinite ease-in-out',
+				'shimmer': 'shimmer 2s infinite linear'
+			},
+			backgroundImage: {
+				'crypto-grid': 'radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+				'glow-green': 'radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, rgba(0, 0, 0, 0) 70%)',
+				'glow-blue': 'radial-gradient(circle, rgba(34, 115, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%)',
 			}
 		}
 	},

@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +90,29 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-crypto-dark text-foreground;
+  }
+}
+
+@layer components {
+  .glow-text-green {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+  }
+  
+  .glow-text-blue {
+    text-shadow: 0 0 10px rgba(34, 115, 255, 0.8);
+  }
+  
+  .glow-border-green {
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+  }
+  
+  .glow-border-blue {
+    box-shadow: 0 0 5px rgba(34, 115, 255, 0.5);
+  }
+  
+  .crypto-pattern {
+    background-size: 20px 20px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   }
 }
