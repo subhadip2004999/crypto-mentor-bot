@@ -67,7 +67,7 @@ export const processMessage = async (message: string): Promise<BotResponse> => {
       return {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: "I'm designed to provide insights on cryptocurrency and trading only. Let me know if you need help with anything related to the crypto market!",
+        content: "I'm designed to help with cryptocurrency and trading only. Let me know if you need help with crypto!",
         timestamp: new Date(),
       };
     }
@@ -75,7 +75,9 @@ export const processMessage = async (message: string): Promise<BotResponse> => {
     // Check for specific requests
     if (message.toLowerCase().includes("price") || 
         message.toLowerCase().includes("value") ||
-        message.toLowerCase().includes("worth")) {
+        message.toLowerCase().includes("worth") ||
+        message.toLowerCase().includes("top") ||
+        message.toLowerCase().includes("list")) {
       return {
         type: "price",
         coinId: extractCoinFromMessage(message),
@@ -117,7 +119,7 @@ export const processMessage = async (message: string): Promise<BotResponse> => {
     return {
       id: crypto.randomUUID(),
       role: "assistant",
-      content: "I apologize, but I encountered an error processing your request. Please try again with a different question about cryptocurrencies or trading.",
+      content: "I encountered an error. Please try again with a different crypto question.",
       timestamp: new Date(),
       isError: true,
     };
@@ -132,11 +134,40 @@ const extractCoinFromMessage = (message: string): string | undefined => {
     "bnb": "binancecoin",
     "sol": "solana",
     "ada": "cardano",
+    "doge": "dogecoin",
+    "xrp": "xrp",
+    "dot": "polkadot",
+    "link": "chainlink",
+    "ltc": "litecoin",
+    "avax": "avalanche",
+    "matic": "polygon",
+    "uni": "uniswap",
+    "shib": "shiba-inu",
+    "trx": "tron",
+    "xlm": "stellar",
+    "near": "near",
+    "algo": "algorand",
+    "vet": "vechain",
+    "fil": "filecoin",
+    "atom": "cosmos",
     "bitcoin": "bitcoin",
     "ethereum": "ethereum",
     "binance": "binancecoin",
     "solana": "solana",
     "cardano": "cardano",
+    "dogecoin": "dogecoin",
+    "polkadot": "polkadot",
+    "chainlink": "chainlink",
+    "avalanche": "avalanche",
+    "polygon": "polygon",
+    "uniswap": "uniswap",
+    "litecoin": "litecoin",
+    "stellar": "stellar",
+    "cosmos": "cosmos",
+    "filecoin": "filecoin",
+    "algorand": "algorand",
+    "vechain": "vechain",
+    "shiba": "shiba-inu",
   };
 
   const lowercaseMessage = message.toLowerCase();
@@ -161,34 +192,34 @@ const generateResponse = (message: string): string => {
   
   if (lowercaseMessage.includes("what is") || lowercaseMessage.includes("explain")) {
     if (lowercaseMessage.includes("bitcoin")) {
-      return "Bitcoin (BTC) is the first and most valuable cryptocurrency, created in 2009 by an anonymous person or group known as Satoshi Nakamoto. It's a decentralized digital currency that operates without a central authority or bank, using a peer-to-peer network to verify transactions through cryptography.";
+      return "Bitcoin (BTC) is the first cryptocurrency, created in 2009 by Satoshi Nakamoto. It's a decentralized digital currency that operates without central authority.";
     }
     if (lowercaseMessage.includes("ethereum")) {
-      return "Ethereum (ETH) is a decentralized blockchain platform that enables the creation of smart contracts and decentralized applications (dApps). Created by Vitalik Buterin, it's the second-largest cryptocurrency by market capitalization and has become the foundation for much of the DeFi (Decentralized Finance) ecosystem.";
+      return "Ethereum (ETH) is a blockchain platform for smart contracts and dApps. It's the second-largest cryptocurrency by market cap and powers most of DeFi.";
     }
     if (lowercaseMessage.includes("blockchain")) {
-      return "Blockchain is a distributed digital ledger technology that records transactions across many computers in a way that ensures security, transparency, and immutability. Each 'block' contains a list of transactions, and once completed, it's linked to the previous block, forming a 'chain'. This technology underpins all cryptocurrencies.";
+      return "Blockchain is a distributed digital ledger that records transactions securely across many computers. It's the technology behind cryptocurrencies.";
     }
     if (lowercaseMessage.includes("defi")) {
-      return "DeFi (Decentralized Finance) refers to financial applications built on blockchain technology that aim to recreate and improve upon traditional financial systems without central authorities. This includes decentralized exchanges, lending platforms, insurance, and more, primarily built on the Ethereum blockchain.";
+      return "DeFi (Decentralized Finance) refers to financial applications built on blockchain technology without central authorities. Includes exchanges, lending platforms, and more.";
     }
     if (lowercaseMessage.includes("nft")) {
-      return "NFTs (Non-Fungible Tokens) are unique digital assets that represent ownership of a specific item or piece of content on the blockchain. Unlike cryptocurrencies such as Bitcoin where each unit is identical, each NFT has unique properties and cannot be exchanged on a like-for-like basis. They're commonly used for digital art, collectibles, music, and gaming items.";
+      return "NFTs (Non-Fungible Tokens) are unique digital assets that represent ownership of specific items on the blockchain. Used for digital art, collectibles, music, and gaming.";
     }
   }
   
   if (lowercaseMessage.includes("investment") || lowercaseMessage.includes("invest") || lowercaseMessage.includes("portfolio")) {
-    return "When investing in cryptocurrencies, diversification is key. Consider allocating your portfolio across established cryptocurrencies like Bitcoin and Ethereum (60-70%), mid-cap altcoins (20-30%), and smaller, more speculative projects (5-10%). Always do your own research, invest only what you can afford to lose, and consider dollar-cost averaging to manage volatility.";
+    return "Crypto investment tip: Diversify across established coins (60-70%), mid-caps (20-30%), and smaller projects (5-10%). Do your research and consider dollar-cost averaging.";
   }
   
   if (lowercaseMessage.includes("scam") || lowercaseMessage.includes("security") || lowercaseMessage.includes("safe")) {
-    return "To protect yourself from crypto scams: 1) Research projects thoroughly before investing, 2) Be wary of promises of guaranteed returns or pressure to invest quickly, 3) Use hardware wallets for long-term storage, 4) Enable two-factor authentication on all exchanges, 5) Never share your private keys or seed phrases, and 6) Be skeptical of unexpected token airdrops or messages asking for your crypto.";
+    return "Crypto security tips: Research projects thoroughly, be skeptical of guaranteed returns, use hardware wallets, enable 2FA, never share private keys, and watch for unexpected airdrops.";
   }
   
   if (lowercaseMessage.includes("bull") || lowercaseMessage.includes("bear") || lowercaseMessage.includes("market cycle")) {
-    return "Cryptocurrency markets typically cycle through accumulation (early bull), markup (bull market), distribution (early bear), and markdown (bear market) phases. Bull markets are characterized by optimism and rising prices, while bear markets feature pessimism and falling prices. These cycles are often more extreme in crypto compared to traditional markets due to the industry's relative immaturity and volatility.";
+    return "Crypto markets cycle through accumulation, markup (bull), distribution, and markdown (bear) phases. These cycles are more extreme in crypto due to the market's volatility.";
   }
   
   // Default response for other crypto-related queries
-  return "That's an interesting question about the crypto market. While I don't have specific data on that particular topic right now, I recommend consulting technical charts, market sentiment indicators, and fundamental analysis of the project's development when making trading decisions. Would you like me to explain any specific crypto concept or trading strategy in more detail?";
+  return "That's an interesting question. For trading decisions, I recommend checking technical charts, sentiment indicators, and project fundamentals. Need specific details?";
 };

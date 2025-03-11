@@ -11,13 +11,15 @@ const CryptoPriceTracker = () => {
   const [cryptos, setCryptos] = useState<CryptoCurrency[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [page, setPage] = useState(0);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     loadCryptoData();
-    // Refresh data every 30 seconds
+    // Refresh data every 20 seconds
     const interval = setInterval(() => {
       refreshData(false);
-    }, 30000);
+    }, 20000);
     return () => clearInterval(interval);
   }, []);
 
@@ -38,11 +40,11 @@ const CryptoPriceTracker = () => {
       const data = await fetchCryptoData();
       setCryptos(data);
       if (showToast) {
-        toast.success("Cryptocurrency prices updated");
+        toast.success("Prices updated");
       }
     } catch (error) {
       if (showToast) {
-        toast.error("Failed to refresh cryptocurrency data");
+        toast.error("Failed to refresh data");
       }
     } finally {
       setRefreshing(false);
@@ -71,9 +73,23 @@ const CryptoPriceTracker = () => {
     return `$${(value / 1_000).toFixed(2)}K`;
   };
 
+  const totalPages = Math.ceil(cryptos.length / itemsPerPage);
+  const displayedCryptos = cryptos.slice(
+    page * itemsPerPage,
+    (page + 1) * itemsPerPage
+  );
+
+  const nextPage = () => {
+    if (page < totalPages - 1) setPage(page + 1);
+  };
+
+  const prevPage = () => {
+    if (page > 0) setPage(page - 1);
+  };
+
   if (loading) {
     return (
-      <Card className="bg-crypto-gray border-crypto-gray">
+      <Card className="bg-crypto-gray/90 border-crypto-gray backdrop-blur-md">
         <CardHeader>
           <CardTitle className="text-white flex justify-between items-center">
             <span>Live Cryptocurrency Prices</span>
@@ -102,23 +118,48 @@ const CryptoPriceTracker = () => {
   }
 
   return (
-    <Card className="bg-crypto-gray border-crypto-gray">
+    <Card className="bg-crypto-gray/90 border-crypto-gray backdrop-blur-md">
       <CardHeader className="pb-2">
         <CardTitle className="text-white flex justify-between items-center">
-          <span>Live Cryptocurrency Prices</span>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white hover:text-crypto-green"
-            onClick={() => refreshData()}
-            disabled={refreshing}
-          >
-            <RefreshCw className={`h-4 w-4 ${refreshing ? "animate-spin" : ""}`} />
-          </Button>
+          <div className="flex items-center">
+            <span>Live Cryptocurrency Prices</span>
+            <span className="text-xs ml-2 text-gray-400">
+              Page {page + 1}/{totalPages}
+            </span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7 text-white hover:text-crypto-green"
+              onClick={prevPage}
+              disabled={page === 0}
+            >
+              &lt;
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7 text-white hover:text-crypto-green"
+              onClick={nextPage}
+              disabled={page === totalPages - 1}
+            >
+              &gt;
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:text-crypto-green"
+              onClick={() => refreshData()}
+              disabled={refreshing}
+            >
+              <RefreshCw className={`h-4 w-4 ${refreshing ? "animate-spin" : ""}`} />
+            </Button>
+          </div>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {cryptos.map((crypto) => (
+        {displayedCryptos.map((crypto) => (
           <div key={crypto.id} className="flex items-center justify-between py-3 border-b border-crypto-gray/30">
             <div className="flex items-center">
               <div className="w-8 h-8 mr-3 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">

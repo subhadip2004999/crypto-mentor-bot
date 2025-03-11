@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Message, WELCOME_MESSAGE, processMessage } from "@/utils/chatbotService";
-import { Lightbulb, Send, Loader2, BarChart3 } from "lucide-react";
+import { Lightbulb, Send, Loader2, BarChart3, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import CryptoPriceTracker from "./CryptoPriceTracker";
 import CryptoRecommendation from "./CryptoRecommendation";
@@ -117,7 +117,7 @@ const CryptoBot = () => {
           id: crypto.randomUUID(),
           role: "assistant",
           content:
-            "I encountered an error processing your request. Please try again with a different question about cryptocurrencies or trading.",
+            "I encountered an error processing your request. Please try again.",
           timestamp: new Date(),
           isError: true,
         },
@@ -141,18 +141,32 @@ const CryptoBot = () => {
             <p className="text-xs text-gray-400">Crypto Trading Assistant</p>
           </div>
         </div>
-        <Button 
-          variant="outline" 
-          className="text-crypto-green border-crypto-green hover:bg-crypto-green hover:text-black"
-          onClick={() => setShowPriceTracker(!showPriceTracker)}
-        >
-          <BarChart3 className="mr-2 h-4 w-4" />
-          Live Prices
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            className="text-crypto-green border-crypto-green hover:bg-crypto-green hover:text-black"
+            onClick={() => setShowPriceTracker(!showPriceTracker)}
+          >
+            <BarChart3 className="mr-2 h-4 w-4" />
+            Live Prices
+          </Button>
+          <Button
+            variant="outline"
+            className="text-crypto-blue border-crypto-blue hover:bg-crypto-blue hover:text-black"
+            onClick={() => {
+              setChartCoin("bitcoin");
+              setShowChart(!showChart);
+            }}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            BTC Chart
+          </Button>
+        </div>
       </div>
 
       {/* Chat area */}
-      <div className="flex-1 overflow-hidden bg-crypto-dark relative crypto-pattern">
+      <div className="flex-1 overflow-hidden bg-crypto-dark relative bg-[url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat">
+        <div className="absolute inset-0 bg-crypto-darker/70 backdrop-blur-sm crypto-pattern" />
         <div className="absolute inset-0 bg-glow-green animate-pulse-glow opacity-30" />
         
         <ScrollArea className="h-full px-4 py-6 relative z-10">
@@ -162,14 +176,14 @@ const CryptoBot = () => {
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                     message.role === "user"
-                      ? "bg-crypto-blue text-white ml-12"
-                      : "bg-crypto-gray text-white mr-12"
+                      ? "bg-crypto-blue/90 text-white ml-12"
+                      : "bg-crypto-gray/90 text-white mr-12"
                   } ${message.isError ? "border border-red-500" : ""}`}
                 >
                   {message.isLoading ? (
                     <div className="flex items-center space-x-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      <span>Processing your request...</span>
+                      <span>Processing...</span>
                     </div>
                   ) : (
                     <p className="whitespace-pre-wrap">{message.content}</p>
@@ -188,7 +202,7 @@ const CryptoBot = () => {
 
             {showChart && (
               <div className="flex justify-start">
-                <div className="w-full max-w-2xl mr-12 bg-crypto-gray rounded-xl p-3">
+                <div className="w-full max-w-2xl mr-12 bg-crypto-gray/90 backdrop-blur-md rounded-xl p-3">
                   <CryptoChart coinId={chartCoin} />
                 </div>
               </div>
@@ -270,14 +284,14 @@ const CryptoBot = () => {
           size="sm"
           className="text-xs whitespace-nowrap border-crypto-gray text-gray-300 hover:bg-crypto-gray"
           onClick={() => {
-            setInput("How to avoid crypto scams?");
+            setInput("Show top 20 cryptos");
             setTimeout(() => {
               const form = document.getElementById("chat-form") as HTMLFormElement;
               form?.dispatchEvent(new Event("submit", { cancelable: true }));
             }, 100);
           }}
         >
-          Crypto security
+          Top 20 cryptos
         </Button>
       </div>
 
