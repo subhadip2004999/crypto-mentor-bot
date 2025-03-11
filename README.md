@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/031eadca-a8d0-4e26-984c-2c3f8791919d
+**URL**: https://crypto-mentor-bot.lovable.app/
 
 ## How can I edit this code?
 
